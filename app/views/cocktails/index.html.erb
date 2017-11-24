@@ -1,22 +1,30 @@
 <div class="banner" style="background-image: linear-gradient(-225deg, rgba(0,101,168,0.6) 0%, rgba(0,36,61,0.6) 50%), url('http://www.tao-restaurant.fr/wp-content/uploads/2013/03/plage20111102.jpg');">
-  <div class="banner-content">
-    <h1> La maison du cocktail </h1>
-    <p> Les meilleurs cocktails en ville </p>
-    <%= link_to "Ajouter un nouveau cocktail", new_cocktail_path, class:"btn btn-primary"%>
+   <div class="banner-content">
+      <h1> La maison du cocktail </h1>
+      <p> Les meilleurs cocktails en ville </p>
       <div class="container">
-        <div class='row'>
-           <% @cocktails.each do |cocktail| %>
-              <div class="col-xs-12 col-sm-4">
-                <div class="card">
+         <%= link_to "Ajouter un nouveau cocktail", new_cocktail_path, class:"btn btn-primary"%>
+         <div class='row'>
+            <% @cocktails.each do |cocktail| %>
+            <div class="col-xs-12 col-sm-4">
+               <% if cocktail.photo.url %>
+               <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('<%= cl_image_path cocktail.photo.url %>')">
                   <div class="card-description">
-                    <p> <%= cocktail.name.capitalize %></p>
+                     <p class="card-romain"> <%= cocktail.name.capitalize %></p>
                   </div>
                   <%= link_to "", cocktail_path(cocktail), {class: "card-link"} %>
-                </div>
-              </div>
-            <%end%>
-          </div>
-        </div>
+               </div>
+               <%else%>
+               <div class="card" style="background-image: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.2)), url('http://www.seriouseats.com/recipes/assets_c/2015/04/20150329-sierramadresunrise-cocktail-elana-lepkowski-thumb-1500xauto-421577.jpg')">
+                  <div class="card-description">
+                     <p class="card-romain"> <%= cocktail.name.capitalize %></p>
+                  </div>
+                  <%= link_to "", cocktail_path(cocktail), {class: "card-link"} %>
+               </div>
+               <% end %>
+            </div>
+         <%end%>
       </div>
-    </div>
+   </div>
+</div>
 
